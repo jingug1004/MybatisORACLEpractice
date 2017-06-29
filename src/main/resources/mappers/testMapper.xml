@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sd.practice.mappers.testMapper">
+
+    <select id="callAll" resultType="com.sd.domain.BoardVO">
+      <![CDATA[
+select
+  IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
+from
+  (SELECT ROWNUM AS rnum, IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
+  FROM TB_BOARD)
+where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
+ORDER BY IDX ASC
+        ]]>
+    </select>
+
+    <select id="proc3" resultType="com.sd.domain.BoardVO">
+        <![CDATA[
+        select
+        IDX, PARENT_IDX, TITLE, CONTENTS, HIT_CNT, DEL_GB,CREA_DTM, CREA_ID,
+        from
+        TB_BOARD
+        where
+        #{min} between #{max}
+        ]]>
+        <if test="#{search_word}">!= null
+            and TITLE like '%' || #{searchWord} || '%'
+        </if>
+        group by PARENT_IDX
+        order by IDX DESC
+    </select>
+
+
+
+    <select id="countPaging" resultType="int">
+        <![CDATA[
+        select
+          count(IDX)
+        from
+         TB_BOARD
+        where
+        IDX > 0
+        ]]>
+    </select>
+
+    <insert id="addAttach">
+        INSERT INTO FILE_UPLOAD (UPLOAD_PATH)
+        VALUES (#{fullName})
+    </insert>
+
+    <!--<select id="callAll" parameterType="hashmap" resultType="com.sd.domain.BoardVO">-->
+        <!--<include refid="pagingPre"/>-->
+        <!--<![CDATA[-->
+        <!--SELECT-->
+            <!--ROW_NUMBER() OVER (ORDER BY IDX DESC) RNUM,-->
+            <!--IDX,-->
+            <!--TITLE,-->
+            <!--HIT_CNT,-->
+            <!--CREA_DTM-->
+        <!--FROM-->
+            <!--TB_BOARD-->
+        <!--WHERE-->
+            <!--DEL_GB = 'N'-->
+    <!--]]>-->
+        <!--<include refid="pagingPost"/>-->
+    <!--</select>-->
+
+    <!--<sql id="pagingPre">-->
+        <!--<![CDATA[-->
+        <!--SELECT-->
+            <!--AAA.*-->
+        <!--FROM(-->
+            <!--SELECT-->
+                <!--COUNT(*) OVER() AS TOTAL_COUNT,-->
+                <!--AA.*-->
+            <!--FROM(-->
+    <!--]]>-->
+    <!--</sql>-->
+
+    <!--<sql id="pagingPost">-->
+        <!--<![CDATA[-->
+            <!--) AA-->
+        <!--) AAA-->
+        <!--WHERE-->
+            <!--AAA.RNUM BETWEEN 5 AND 30-->
+    <!--]]>-->
+    <!--</sql>-->
+
+    <!-- 김진규 팀장님!
+    <select id="callAll" resultType="com.sd.domain.BoardVO" parameterType="HashMap">
+
+        select *
+        from (select *
+        from (select rownum rnum, idx, title, hit_cnt, crea_id, crea_dtm
+
+        from
+        tb_board
+        <if test="sitem != null">
+            where
+            title like '%'||#{sitem}||'%'
+        </if>
+        )
+        where rnum <![CDATA[<=]]> #{imax}
+        )
+        <choose>
+            <when test="sitem != null || sitem != ''">
+                where rnum > 0
+            </when>
+            <when test="sitem == null">
+                where rnum > #{imin}
+            </when>
+        </choose>
+        order by rnum desc
+    </select>
+-->
+</mapper>
