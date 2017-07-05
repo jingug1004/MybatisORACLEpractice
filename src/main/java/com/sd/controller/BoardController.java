@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class BoardController {
@@ -23,10 +26,12 @@ public class BoardController {
     @Inject
     private BoardService boardService;
 
+    //    @ResponseBody
     @RequestMapping(value = "/callAll", method = RequestMethod.GET)
     public String callAll(Model model,
                           BoardVO boardVO,
-                          PageMake pageMake) throws Exception {
+                          PageMake pageMake,
+                          String fullName) throws Exception {
 
         logger.info("lll~~~~ Show all list. lll~~~");
 
@@ -41,6 +46,8 @@ public class BoardController {
         pageMake.setTotalCount(boardService.countPaging());
 
         model.addAttribute("pageMake", pageMake);
+
+        boardService.getAttach(fullName);
 
         return "board";
 
@@ -85,4 +92,19 @@ public class BoardController {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/callAll", method = RequestMethod.GET)
+    public void findCondPOST(
+            @RequestParam(value = "toData") List<String> valTest) throws Exception {
+
+        logger.info("valTest " + valTest.get(0));
+
+//        int i = 0;
+//        for( String value : valTest ){
+//            logger.info( ">>> name's value : " + value + "\tage : " + valTest.get(i) );
+//            i++;
+//        }
+
+//        boardService.findCondPOST(valTest);
+    }
 }

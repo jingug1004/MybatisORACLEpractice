@@ -19,5 +19,8 @@ public interface BoardDAO {
 
     public void addAttach(String fullName) throws Exception;
 
+    public List<String> getAttach (String fullName) throws Exception;
+
+    public void findCondPOST (List<String> valTest) throws Exception;
 
 }

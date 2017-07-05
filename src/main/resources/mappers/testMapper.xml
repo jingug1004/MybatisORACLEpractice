@@ -13,8 +13,9 @@ from
   (SELECT ROWNUM AS rnum, IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
   FROM TB_BOARD)
 where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
+   ]]>
+        <include refid="search"></include>
 ORDER BY IDX ASC
-        ]]>
     </select>
 
     <select id="proc3" resultType="com.sd.domain.BoardVO">
@@ -34,7 +35,6 @@ ORDER BY IDX ASC
     </select>
 
 
-
     <select id="countPaging" resultType="int">
         <![CDATA[
         select
@@ -51,41 +51,87 @@ ORDER BY IDX ASC
         VALUES (#{fullName})
     </insert>
 
+    <select id="getAttach" resultType="string">
+        SELECT UPLOAD_PATH FROM FILE_UPLOAD ORDER BY UPLOAD_PATH
+    </select>
+
+    <select id="findCondition">
+              <![CDATA[
+select
+  IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
+from
+  (SELECT ROWNUM AS rnum, IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
+  FROM TB_BOARD)
+where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
+ ]]>
+        <include refid="search"></include>
+
+        ORDER BY IDX ASC
+
+    </select>
+
+    <sql id="search">
+        <if test="valTest != null">
+            <if test="valTest == 테">
+                and TITLE like '%' || #{valTest} || '%')
+            </if>
+            <if test="valTest == 기">
+                and TITLE like '%' || #{valTest} || '%')
+            </if>
+            <if test="valTest == Test">
+                and TITLE like '%' || #{valTest} || '%')
+            </if>
+            <if test="valTest == 테스트">
+--                 and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
+            </if>
+            <if test="valTest == 넘기기">
+--                 and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
+            </if>
+            <if test="valTest == 제목">
+--                 and ( title like CONCAT('%', #{keyword}, '%')
+--                 OR
+--                 content like CONCAT('%', #{keyword}, '%')
+--                 OR
+--                 writer like CONCAT('%', #{keyword}, '%'))
+            </if>
+        </if>
+    </sql>
+
     <!--<select id="callAll" parameterType="hashmap" resultType="com.sd.domain.BoardVO">-->
-        <!--<include refid="pagingPre"/>-->
-        <!--<![CDATA[-->
-        <!--SELECT-->
-            <!--ROW_NUMBER() OVER (ORDER BY IDX DESC) RNUM,-->
-            <!--IDX,-->
-            <!--TITLE,-->
-            <!--HIT_CNT,-->
-            <!--CREA_DTM-->
-        <!--FROM-->
-            <!--TB_BOARD-->
-        <!--WHERE-->
-            <!--DEL_GB = 'N'-->
+    <!--<include refid="pagingPre"/>-->
+    <!--<![CDATA[-->
+    <!--SELECT-->
+    <!--ROW_NUMBER() OVER (ORDER BY IDX DESC) RNUM,-->
+    <!--IDX,-->
+    <!--TITLE,-->
+    <!--HIT_CNT,-->
+    <!--CREA_DTM-->
+    <!--FROM-->
+    <!--TB_BOARD-->
+    <!--WHERE-->
+    <!--DEL_GB = 'N'-->
     <!--]]>-->
-        <!--<include refid="pagingPost"/>-->
+    <!--<include refid="pagingPost"/>-->
     <!--</select>-->
 
     <!--<sql id="pagingPre">-->
-        <!--<![CDATA[-->
-        <!--SELECT-->
-            <!--AAA.*-->
-        <!--FROM(-->
-            <!--SELECT-->
-                <!--COUNT(*) OVER() AS TOTAL_COUNT,-->
-                <!--AA.*-->
-            <!--FROM(-->
+    <!--<![CDATA[-->
+    <!--SELECT-->
+    <!--AAA.*-->
+    <!--FROM(-->
+    <!--SELECT-->
+    <!--COUNT(*) OVER() AS TOTAL_COUNT,-->
+    <!--AA.*-->
+    <!--FROM(-->
     <!--]]>-->
     <!--</sql>-->
 
     <!--<sql id="pagingPost">-->
-        <!--<![CDATA[-->
-            <!--) AA-->
-        <!--) AAA-->
-        <!--WHERE-->
-            <!--AAA.RNUM BETWEEN 5 AND 30-->
+    <!--<![CDATA[-->
+    <!--) AA-->
+    <!--) AAA-->
+    <!--WHERE-->
+    <!--AAA.RNUM BETWEEN 5 AND 30-->
     <!--]]>-->
     <!--</sql>-->
 

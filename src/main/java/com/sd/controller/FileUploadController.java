@@ -148,6 +148,4 @@ public class FileUploadController {
         return new ResponseEntity<String>("deleted", HttpStatus.OK);
     }
 
-
-
 }

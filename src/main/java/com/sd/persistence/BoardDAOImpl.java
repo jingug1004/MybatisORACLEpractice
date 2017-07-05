@@ -65,4 +65,15 @@ public class BoardDAOImpl implements BoardDAO {
 
     }
 
+    @Override
+    public List<String> getAttach(String fullName) throws Exception {
+        return session.selectList(name + ".getAttach", fullName);
+    }
+
+    @Override
+    public void findCondPOST(List<String> valTest) throws Exception {
+        session.selectList(name + "findCondPOST", valTest);
+    }
+
+
 }

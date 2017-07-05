@@ -14,6 +14,8 @@
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/resources/js/upload.js"></script>
+    <script src="/resources/js/FindCondition.js"></script>
+
 
     <%--<script type="text/javascript" src="js/bootstrap.js"></script>--%>
 
@@ -48,6 +50,27 @@
         <input type="text" placeholder="Search"/>
         <button class="btn-primary">검색</button>
     </div>
+    <hr>
+    <div>
+        <%--<div id="select">--%>
+            <%--<div>--%>
+                <%--<span id="select_text" class="select_text">선택하세요!!</span>--%>
+                <%--<span id="select_choice" class="select_choice">▼</span>--%>
+            <%--</div>--%>
+            <%--<div id="sel_list" class="sel_list"></div>--%>
+        <%--</div>--%>
+        <div id="check">
+            <input type="checkbox" class="chk" onclick="selectAll(this)" /> 모두 체크<br/>
+            <input type="checkbox" class="chk" name="box" value="테"/> 테 <br />
+            <input type="checkbox" class="chk" name="box" value="기"/> 기 <br />
+            <input type="checkbox" class="chk" name="box" value="Test"/> Test <br />
+            <input type="checkbox" class="chk" name="box" value="테스트"/> 테스트 <br />
+            <input type="checkbox" class="chk" name="box" value="넘기기"/> 넘기기 <br />
+            <input type="checkbox" class="chk" name="box" value="제목"/> 제목 <br />
+        </div>
+    </div>
+
+    <hr>
     <div class="box-body">
         <%--<table class="table table-bordered">--%>
         <table class="table table-bordered">
@@ -146,7 +169,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-
+    // 파일 업로드 - by 진국
     var template = Handlebars.compile($("#template").html());
 
     $(".fileDrop").on("dragenter dragover", function (evt) {
@@ -174,33 +197,9 @@
             contentType: false,
             type: 'POST',
             success: function (data) {
-
-//                    alert(data);
-
-                /* uploadAjax.jsp의 내용!
-                 var str = "";
-
-                 console.log(data);
-                 console.log(checkImageType(data));
-
-                 if (checkImageType(data)) {
-                 str = "<div><a href=displayFile?fileName=" + getImageLink(data) + ">"
-                 + "<img src='displayFile?fileName=" + data + "'/>"
-                 + "</a><small data-src=" + data + ">X</small></div>";
-                 } else {
-                 str = "<div><a href='displayFile?fileName=" + data + "'>"
-                 + getOriginalName(data) + "</a>"
-                 + "<small data-src= " + data + ">X</small></div>"
-                 }
-                 $(".uploadedList").append(str);
-                 */
-
                 var fileInfo = getFileInfo(data);
-
                 var html = template(fileInfo);
-
                 $(".uploadedList").append(html);
-
             }
         });
     });
@@ -243,6 +242,18 @@
         location.href = '';
 
     });
+
+    $.getJSON("/callAll", function (list) {
+        $(list).each(function () {
+
+            var fileInfo = getFileInfo(this);
+
+            var html = template(fileInfo);
+
+            $(".uploadedList").append(html);
+        });
+    });
+    // 파일 업로드 - by 진국
 
 
 </script>

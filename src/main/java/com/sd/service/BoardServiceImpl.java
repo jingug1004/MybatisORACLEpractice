@@ -4,6 +4,7 @@ import com.sd.domain.BoardVO;
 import com.sd.domain.PageMake;
 import com.sd.persistence.BoardDAO;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -38,4 +39,17 @@ public class BoardServiceImpl implements BoardService {
     public void regist(String fullName) throws Exception {
         boardDAO.addAttach(fullName);
     }
+
+    @Override
+    @ResponseBody
+    public List<String> getAttach(String fullName) throws Exception {
+        return boardDAO.getAttach(fullName);
+    }
+
+    @Override
+    public void findCondPOST(List<String> valTest) throws Exception {
+        boardDAO.findCondPOST(valTest);
+    }
+
+
 }
