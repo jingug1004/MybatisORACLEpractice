@@ -30,15 +30,21 @@ public class BoardController {
     @RequestMapping(value = "/callAll", method = RequestMethod.GET)
     public String callAll(Model model,
                           BoardVO boardVO,
+                          String fullName,
                           PageMake pageMake,
-                          String fullName) throws Exception {
+                          HttpServletRequest httpServletRequest) throws Exception {
 
-        logger.info("lll~~~~ Show all list. lll~~~");
+        logger.info("\n\nlll~~~~ Show all list. lll~~~");
 
-//        model.addAttribute("callAll", boardService.callAll());
-        model.addAttribute("list", boardService.listCountCriteria(pageMake.getPage(), pageMake.getPerPageNum()));
+        model.addAttribute("list", boardService.listCountCriteria(pageMake.getPage(), pageMake.getPerPageNum(), pageMake.getCheckBox()));
 
         pageMake = new PageMake();
+
+        pageMake.setCheckBox(httpServletRequest.getParameter("cond"));
+
+        logger.info("httpServletRequest.getParameter(cond)" + httpServletRequest.getParameter("cond"));
+
+//        model.addAttribute("callAll", boardService.callAll());
 
         pageMake.setPage(pageMake.getPage());
         pageMake.setPerPageNum(pageMake.getPerPageNum());
@@ -46,6 +52,44 @@ public class BoardController {
         pageMake.setTotalCount(boardService.countPaging());
 
         model.addAttribute("pageMake", pageMake);
+
+        logger.info("pageMake.getCheckBox()" + pageMake.getCheckBox());
+
+        boardService.getAttach(fullName);
+
+        return "board";
+
+    }
+
+    @RequestMapping(value = "/callAll02a", method = RequestMethod.GET)
+    public String callAll02b(Model model,
+                             BoardVO boardVO,
+                             String fullName,
+                             PageMake pageMake,
+                             HttpServletRequest httpServletRequest) throws Exception {
+
+        logger.info("\n\nlll~~~~ Show all list. lll~~~");
+
+        pageMake.setCheckBox(httpServletRequest.getParameter("cond"));
+
+        model.addAttribute("list", boardService.listCountCriteria(pageMake.getPage(), pageMake.getPerPageNum(), pageMake.getCheckBox()));
+
+        pageMake = new PageMake();
+
+        pageMake.setCheckBox(httpServletRequest.getParameter("cond"));
+
+        logger.info("httpServletRequest.getParameter(cond)" + httpServletRequest.getParameter("cond"));
+
+//        model.addAttribute("callAll", boardService.callAll());
+
+        pageMake.setPage(pageMake.getPage());
+        pageMake.setPerPageNum(pageMake.getPerPageNum());
+
+        pageMake.setTotalCount(boardService.countPaging());
+
+        model.addAttribute("pageMake", pageMake);
+
+        logger.info("pageMake.getCheckBox()" + pageMake.getCheckBox());
 
         boardService.getAttach(fullName);
 
@@ -93,18 +137,19 @@ public class BoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/callAll", method = RequestMethod.GET)
-    public void findCondPOST(
-            @RequestParam(value = "toData") List<String> valTest) throws Exception {
+    @RequestMapping(value = "/findCondition", method = RequestMethod.POST)
+    public String findCondPOST(
+            @RequestParam(value = "toData[]", required = false) List<String> valTest) throws Exception {
 
-        logger.info("valTest " + valTest.get(0));
+        logger.info("\n\nlll~~~ @ResponseBody findCondPOST valTest " + valTest);
 
 //        int i = 0;
 //        for( String value : valTest ){
 //            logger.info( ">>> name's value : " + value + "\tage : " + valTest.get(i) );
 //            i++;
 //        }
-
 //        boardService.findCondPOST(valTest);
+
+        return "succ";
     }
 }

@@ -6,6 +6,10 @@
 	<meta charset="UTF-8">
 	<title>Home</title>
 
+	<meta http-equiv="Cache-Control" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+
 	<link rel="stylesheet" href="/resources/bootstrap-3.3.7-dist/css/bootstrap.css">
 
 	<%--<script type='text/javascript' src='script.js'></script>--%>

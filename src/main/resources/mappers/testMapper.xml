@@ -6,7 +6,7 @@
 <mapper namespace="com.sd.practice.mappers.testMapper">
 
     <select id="callAll" resultType="com.sd.domain.BoardVO">
-      <![CDATA[
+        <![CDATA[
 select
   IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
 from
@@ -15,7 +15,20 @@ from
 where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
    ]]>
         <include refid="search"></include>
-ORDER BY IDX ASC
+        ORDER BY IDX ASC
+    </select>
+
+    <select id="callAll02" resultType="com.sd.domain.BoardVO">
+        <![CDATA[
+select
+  IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
+from
+  (SELECT ROWNUM AS rnum, IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
+  FROM TB_BOARD)
+where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
+   ]]>
+        <include refid="search"></include>
+        ORDER BY IDX ASC
     </select>
 
     <select id="proc3" resultType="com.sd.domain.BoardVO">
@@ -56,7 +69,7 @@ ORDER BY IDX ASC
     </select>
 
     <select id="findCondition">
-              <![CDATA[
+        <![CDATA[
 select
   IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
 from
@@ -72,28 +85,28 @@ where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
 
     <sql id="search">
         <if test="valTest != null">
-            <if test="valTest == 테">
-                and TITLE like '%' || #{valTest} || '%')
+            <if test="valTest == 't'.toString()">
+                and TITLE like '%' || #{valTest} || '%'
             </if>
-            <if test="valTest == 기">
-                and TITLE like '%' || #{valTest} || '%')
+            <if test="valTest == 'g'.toString()">
+                and TITLE like '%' || #{valTest} || '%'
             </if>
-            <if test="valTest == Test">
-                and TITLE like '%' || #{valTest} || '%')
+            <if test="valTest == 'Test'.toString()">
+                and TITLE like '%' || #{valTest} || '%'
             </if>
-            <if test="valTest == 테스트">
---                 and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
-            </if>
-            <if test="valTest == 넘기기">
---                 and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
-            </if>
-            <if test="valTest == 제목">
---                 and ( title like CONCAT('%', #{keyword}, '%')
---                 OR
---                 content like CONCAT('%', #{keyword}, '%')
---                 OR
---                 writer like CONCAT('%', #{keyword}, '%'))
-            </if>
+            <!--<if test="valTest == 테스트">-->
+            <!--&#45;&#45;                 and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))-->
+            <!--</if>-->
+            <!--<if test="valTest == 넘기기">-->
+            <!--&#45;&#45;                 and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))-->
+            <!--</if>-->
+            <!--<if test="valTest == 제목">-->
+            <!--&#45;&#45;                 and ( title like CONCAT('%', #{keyword}, '%')-->
+            <!--&#45;&#45;                 OR-->
+            <!--&#45;&#45;                 content like CONCAT('%', #{keyword}, '%')-->
+            <!--&#45;&#45;                 OR-->
+            <!--&#45;&#45;                 writer like CONCAT('%', #{keyword}, '%'))-->
+            <!--</if>-->
         </if>
     </sql>
 

@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardVO> listCountCriteria(int page, int perPageNum) throws Exception {
-        return boardDAO.listCountCriteria(page, perPageNum);
+    public List<BoardVO> listCountCriteria(int page, int perPageNum, String valTest) throws Exception {
+        return boardDAO.listCountCriteria(page, perPageNum, valTest);
     }
 
     @Override

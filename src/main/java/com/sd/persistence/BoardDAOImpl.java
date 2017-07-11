@@ -3,6 +3,8 @@ package com.sd.persistence;
 import com.sd.domain.BoardVO;
 import com.sd.domain.PageMake;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -12,6 +14,9 @@ import java.util.Map;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
+
+    private static final Logger logger = LoggerFactory.getLogger(BoardDAOImpl.class);
+
 
     @Inject
     private SqlSession session;
@@ -37,12 +42,18 @@ public class BoardDAOImpl implements BoardDAO {
     }
 
     @Override
-    public List<BoardVO> listCountCriteria(int page, int perPageNum) throws Exception {
+    public List<BoardVO> listCountCriteria(int page, int perPageNum, String valTest) throws Exception {
 
         Map<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("page", page);
         paramMap.put("perPageNum", perPageNum);
+        paramMap.put("valTest", valTest);
+
+        logger.info("lll~~~ ");
+        logger.info("paramMap.get(\"page\") : " + paramMap.get("page"));
+        logger.info("paramMap.put(\"perPageNum\") : " + paramMap.get("perPageNum"));
+        logger.info("paramMap.get(\"valTest\") : " + paramMap.get("valTest"));
 
         return session.selectList(name + ".callAll", paramMap);
     }

@@ -19,6 +19,16 @@ public class PageMake {
     private String searchType;          // SearchCriteria
     private String searchWord;          // SearchCriteria
 
+    private String checkBox;            // 체크박스 시 선택
+
+    public String getCheckBox() {
+        return checkBox;
+    }
+
+    public void setCheckBox(String checkBox) {
+        this.checkBox = checkBox;
+    }
+
     public int getTotalCount() {
         return totalCount;
     }
@@ -143,8 +153,8 @@ public class PageMake {
                 UriComponentsBuilder.newInstance()
                         .queryParam("page", page)
                         .queryParam("perPageNum", getPerPageNum())
-                        .queryParam("searchType", getSearchType())
-                        .queryParam("keyword", getSearchWord())
+//                        .queryParam("searchType", getSearchType())
+//                        .queryParam("keyword", getSearchWord())
                         .build();
         return uriComponents.toUriString();
     }

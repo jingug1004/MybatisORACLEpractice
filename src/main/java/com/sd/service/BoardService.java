@@ -11,7 +11,7 @@ public interface BoardService {
 
     public List<BoardVO> proc3(PageMake pageMake) throws Exception;
 
-    public List<BoardVO> listCountCriteria(int page, int perPageNum) throws Exception;
+    public List<BoardVO> listCountCriteria(int page, int perPageNum, String valTest) throws Exception;
 
     public int countPaging() throws Exception;
 
