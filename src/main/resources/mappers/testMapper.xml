@@ -18,7 +18,8 @@ where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
         ORDER BY IDX ASC
     </select>
 
-    <select id="callAll02" resultType="com.sd.domain.BoardVO">
+
+    <select id="callAll02" resultType="com.sd.domain.BoardVO02">
         <![CDATA[
 select
   IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT
@@ -27,9 +28,33 @@ from
   FROM TB_BOARD)
 where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
    ]]>
-        <include refid="search"></include>
+        <!--<include refid="search"></include>-->
         ORDER BY IDX ASC
     </select>
+
+
+    <select id="callAll03" resultType="com.sd.domain.BoardVO03">
+        <![CDATA[
+select
+  dummynum, dummytitle, dummywriter, dummydate
+from
+  SEEDTEC1.DOUBLECONN
+   ]]>
+        ORDER BY dummynum ASC
+    </select>
+
+    <!--<select id="callAll02" resultType="com.sd.domain.BoardVO">-->
+        <!--<![CDATA[-->
+<!--select-->
+  <!--IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT-->
+<!--from-->
+  <!--(SELECT ROWNUM AS rnum, IDX, TITLE, CREA_ID, CREA_DTM, HIT_CNT-->
+  <!--FROM TB_BOARD)-->
+<!--where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)-->
+   <!--]]>-->
+        <!--<include refid="search"></include>-->
+        <!--ORDER BY IDX ASC-->
+    <!--</select>-->
 
     <select id="proc3" resultType="com.sd.domain.BoardVO">
         <![CDATA[

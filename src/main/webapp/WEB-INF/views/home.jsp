@@ -36,6 +36,10 @@
 
 <%--<input type="button">데이터 삭제하기</input><br/><br/>--%>
 
+<a href="<c:url value="/doubleConnection"/>"><button type="button" class="btn">더블 커넥션</button></a>
+<a href="<c:url value="/doubleTest"/>"><button type="button" class="btn">더블 커넥션 테스트</button></a>
+<a href="<c:url value="/cso"/>"><button type="button" class="btn">시소</button></a>
+
 
 <%--<script>--%>
 	<%--$(document).ready(function () {--%>

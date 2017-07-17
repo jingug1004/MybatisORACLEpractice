@@ -1,6 +1,8 @@
 package com.sd.service;
 
 import com.sd.domain.BoardVO;
+import com.sd.domain.BoardVO02;
+import com.sd.domain.BoardVO03;
 import com.sd.domain.PageMake;
 import com.sd.persistence.BoardDAO;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,16 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void findCondPOST(List<String> valTest) throws Exception {
         boardDAO.findCondPOST(valTest);
+    }
+
+    @Override
+    public List<BoardVO02> listCountCriteria02(int page, int perPageNum, String valTest) throws Exception {
+        return boardDAO.listCountCriteria02(page, perPageNum, valTest);
+    }
+
+    @Override
+    public List<BoardVO03> listCountCriteria03(int page, int perPageNum, String valTest) throws Exception {
+        return boardDAO.listCountCriteria03(page, perPageNum, valTest);
     }
 
 

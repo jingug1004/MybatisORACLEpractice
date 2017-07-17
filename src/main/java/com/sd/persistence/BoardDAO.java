@@ -1,6 +1,8 @@
 package com.sd.persistence;
 
 import com.sd.domain.BoardVO;
+import com.sd.domain.BoardVO02;
+import com.sd.domain.BoardVO03;
 import com.sd.domain.PageMake;
 
 import java.util.List;
@@ -22,5 +24,10 @@ public interface BoardDAO {
     public List<String> getAttach (String fullName) throws Exception;
 
     public void findCondPOST (List<String> valTest) throws Exception;
+
+    public List<BoardVO02> listCountCriteria02(int page, int perPageNum, String valTest) throws  Exception;
+
+    public List<BoardVO03> listCountCriteria03(int page, int perPageNum, String valTest) throws  Exception;
+
 
 }

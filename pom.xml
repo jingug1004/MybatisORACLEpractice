@@ -196,6 +196,14 @@ https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib
             <version>4.3.5.RELEASE</version>
         </dependency>
 
+        <!--Spring + Mybatis 포스팅은 다중DB 설정-->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <!--출처: http://hellogk.tistory.com/97 [IT Code Storage]-->
+
     </dependencies>
 
     <build>

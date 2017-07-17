@@ -1,12 +1,15 @@
 package com.sd.persistence;
 
 import com.sd.domain.BoardVO;
+import com.sd.domain.BoardVO02;
+import com.sd.domain.BoardVO03;
 import com.sd.domain.PageMake;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +22,15 @@ public class BoardDAOImpl implements BoardDAO {
 
 
     @Inject
+    @Resource(name="sqlSession")
     private SqlSession session;
+
+//    @Inject
+//    @Resource(name="sqlSession02")
+//    private SqlSession session02;
+
+//    @Inject
+//    private SqlSession session02;
 
     private static String name = "com.sd.practice.mappers.testMapper";
 
@@ -50,10 +61,10 @@ public class BoardDAOImpl implements BoardDAO {
         paramMap.put("perPageNum", perPageNum);
         paramMap.put("valTest", valTest);
 
-        logger.info("lll~~~ ");
-        logger.info("paramMap.get(\"page\") : " + paramMap.get("page"));
-        logger.info("paramMap.put(\"perPageNum\") : " + paramMap.get("perPageNum"));
-        logger.info("paramMap.get(\"valTest\") : " + paramMap.get("valTest"));
+//        logger.info("lll~~~ ");
+//        logger.info("paramMap.get(\"page\") : " + paramMap.get("page"));
+//        logger.info("paramMap.put(\"perPageNum\") : " + paramMap.get("perPageNum"));
+//        logger.info("paramMap.get(\"valTest\") : " + paramMap.get("valTest"));
 
         return session.selectList(name + ".callAll", paramMap);
     }
@@ -84,6 +95,40 @@ public class BoardDAOImpl implements BoardDAO {
     @Override
     public void findCondPOST(List<String> valTest) throws Exception {
         session.selectList(name + "findCondPOST", valTest);
+    }
+
+    @Override
+    public List<BoardVO02> listCountCriteria02(int page, int perPageNum, String valTest) throws Exception {
+
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("page", page);
+        paramMap.put("perPageNum", perPageNum);
+        paramMap.put("valTest", valTest);
+
+//        logger.info("lll~~~ ");
+//        logger.info("paramMap.get(\"page\") : " + paramMap.get("page"));
+//        logger.info("paramMap.put(\"perPageNum\") : " + paramMap.get("perPageNum"));
+//        logger.info("paramMap.get(\"valTest\") : " + paramMap.get("valTest"));
+
+        return session.selectList(name + ".callAll02", paramMap);
+    }
+
+    @Override
+    public List<BoardVO03> listCountCriteria03(int page, int perPageNum, String valTest) throws Exception {
+
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("page", page);
+        paramMap.put("perPageNum", perPageNum);
+        paramMap.put("valTest", valTest);
+
+        logger.info("lll~~~ ");
+        logger.info("03 paramMap.get(\"page\") : " + paramMap.get("page"));
+        logger.info("03 paramMap.put(\"perPageNum\") : " + paramMap.get("perPageNum"));
+        logger.info("03 paramMap.get(\"valTest\") : " + paramMap.get("valTest"));
+
+        return session.selectList(name + ".callAll03", paramMap);
     }
 
 
