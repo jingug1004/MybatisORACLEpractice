@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sd</groupId>
-    <artifactId>practice01</artifactId>
+    <artifactId>practice02</artifactId>
     <name>MybatisORACL</name>
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
@@ -158,8 +158,8 @@
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
-            <!--<version>10.2.0.4.0</version>-->
             <version>10.2.0.4.0</version>
+            <!--<version></version>-->
         </dependency>
 
         <dependency>
@@ -203,6 +203,12 @@ https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib
             <version>RELEASE</version>
         </dependency>
         <!--출처: http://hellogk.tistory.com/97 [IT Code Storage]-->
+
+        <!--<dependency>-->
+            <!--<groupId>commons-dbcp</groupId>-->
+            <!--<artifactId>commons-dbcp</artifactId>-->
+            <!--<version>1.2.2</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

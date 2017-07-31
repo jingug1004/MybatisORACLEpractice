@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,6 @@ public class BoardDAOImpl implements BoardDAO {
 
 
     @Inject
-    @Resource(name="sqlSession")
     private SqlSession session;
 
 //    @Inject
@@ -32,7 +30,7 @@ public class BoardDAOImpl implements BoardDAO {
 //    @Inject
 //    private SqlSession session02;
 
-    private static String name = "com.sd.practice.mappers.testMapper";
+    private static String name = "com.sd.practice02.mappers.testMapper";
 
 //    @Override
 //    public List<BoardVO> callAll() throws Exception {

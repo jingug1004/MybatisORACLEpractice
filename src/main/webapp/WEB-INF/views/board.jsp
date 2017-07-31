@@ -97,8 +97,8 @@
                             ${boardVO.TITLE}
                     </td>
                     <td class="text-center">${boardVO.CREA_ID}</td>
-                    <td class="text-warning text-center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-                                                                         value="${boardVO.CREA_DTM}"/></td>
+                    <td class="text-warning text-center">
+                        <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.CREA_DTM}"/></td>
                         <%--<td>${boardVO.CREA_DTM}</td>--%>
                     <td class="text-center"><span class="badge">${boardVO.HIT_CNT}</span></td>
                 </tr>

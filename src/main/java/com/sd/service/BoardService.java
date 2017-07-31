@@ -27,5 +27,4 @@ public interface BoardService {
 
     public void findCondPOST (List<String> valTest) throws Exception;
 
-
 }

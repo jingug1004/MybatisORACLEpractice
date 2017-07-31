@@ -30,4 +30,5 @@ public interface BoardDAO {
     public List<BoardVO03> listCountCriteria03(int page, int perPageNum, String valTest) throws  Exception;
 
 
+
 }

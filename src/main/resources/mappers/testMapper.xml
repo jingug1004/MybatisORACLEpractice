@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sd.practice.mappers.testMapper">
+<mapper namespace="com.sd.practice02.mappers.testMapper">
 
     <select id="callAll" resultType="com.sd.domain.BoardVO">
         <![CDATA[
@@ -17,7 +17,6 @@ where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
         <include refid="search"></include>
         ORDER BY IDX ASC
     </select>
-
 
     <select id="callAll02" resultType="com.sd.domain.BoardVO02">
         <![CDATA[
@@ -200,4 +199,34 @@ where rnum BETWEEN (#{page} * 10 - 9 ) and (#{page} * 10)
         order by rnum desc
     </select>
 -->
+    <!--<select id="listGet" resultType="com.sd.domain.CsoVO">-->
+        <!--<![CDATA[-->
+        <!--select-->
+          <!--count(SEEDTEC1.T_FN_MAIN.FN_PRODUCTID)-->
+        <!--from-->
+         <!--SEEDTEC1.T_FN_MAIN-->
+        <!--where-->
+         <!--SEEDTEC1.T_FN_MAIN.FN_PRODUCTID > 0-->
+        <!--]]>-->
+    <!--</select>-->
+
+    <!--<select id="listGet" resultType="com.sd.domain.CsoVO">-->
+        <!--select-->
+          <!--*-->
+        <!--from-->
+         <!--FN_MAIN-->
+    <!--</select>-->
+
+    <select id="listGet" resultType="com.sd.domain.CsoVO">
+        <![CDATA[
+        select
+          *
+        from
+         SEEDTEC1.T_FN_MAIN
+        where
+         SEEDTEC1.T_FN_MAIN.FN_PRODUCTID > 0
+        ]]>
+    </select>
+
+
 </mapper>
