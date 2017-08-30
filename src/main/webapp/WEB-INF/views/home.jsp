@@ -39,6 +39,7 @@
 <a href="<c:url value="/doubleConnection"/>"><button type="button" class="btn">더블 커넥션</button></a>
 <a href="<c:url value="/doubleTest"/>"><button type="button" class="btn">더블 커넥션 테스트</button></a>
 <a href="<c:url value="/csoGET"/>"><button type="button" class="btn">시소</button></a>
+<a href="<c:url value="/xplatformGET"/>"><button type="button" class="btn">시소</button></a>
 
 
 <%--<script>--%>
